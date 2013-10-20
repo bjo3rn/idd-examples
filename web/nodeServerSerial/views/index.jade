@@ -1,0 +1,12 @@
+!!!5
+html
+  head
+    title #{title} - My Site
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    h1 Node Serial Server Demo
+    p Current sensor value is: #{sensorReading}
+    p LED is: #{ledState}. Toggle: 
+      a(href='/?led=on') ON
+      | , 
+      a(href='/?led=off') OFF

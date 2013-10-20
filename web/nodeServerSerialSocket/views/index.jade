@@ -1,0 +1,29 @@
+!!!5
+html
+  head
+    title Node Serial Server with Socket.IO
+    script(src='/socket.io/socket.io.js')
+    script(src='http://code.jquery.com/jquery-1.10.1.min.js')
+    script
+      // connect socket.io to server
+      var socket = io.connect('http://localhost:80');
+            
+      // when a "sensorReading" message comes through, show its value by
+      // writing the text of the div with id=showValue
+      socket.on('sensorReading', function (data) {
+          $("#showValue").text(data);
+      });
+      
+      // when the user clicks one of the buttons, they call toggle()
+      // toggle emits a message to the socket with the new LED state
+      function toggle(theState) {
+        console.log("toggle: "+theState);
+        socket.emit('toggle',theState);
+      }
+      
+  body
+    h1 Node Serial Server Demo with Socket.IO
+    p Current sensor value is:
+      #showValue not yet available
+    button#ledOn(onClick="toggle('1');") LED ON 
+    button#ledOff(onClick="toggle('0');") LED OFF

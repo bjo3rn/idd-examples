@@ -1,0 +1,5 @@
+# apple stuff
+.DS_Store
+
+# ignore downloaded npm packages 
+node_modules/

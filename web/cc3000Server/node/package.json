@@ -1,0 +1,16 @@
+{
+  "name": "cc3000-test",
+  "description": "simple node.js web server for testing cc3000 module",
+  "version": "0.0.1-1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x"
+  },
+  "scripts": {
+    "start": "node ./server.js"
+  },
+  "subdomain": "cc3000-test",
+  "engines": {
+    "node": "0.10.x"
+  }
+}

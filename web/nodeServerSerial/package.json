@@ -1,0 +1,15 @@
+{
+  "name": "nodeSerialServer",
+  "author": "Bjoern Hartmann <bjoern@eecs.berkeley.edu>",
+  "description": "simple code example of exchanging data between Arduino and a nodejs server",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "serialport": "1.x",
+    "express": "3.x",
+    "jade": "*"
+  }
+}
