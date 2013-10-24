@@ -10,7 +10,7 @@
 var sys = require("sys"); // to print debug messages
 
 // SETUP SERIAL PORT
-var portName = "/dev/tty.usbmodem1411"; //TODO: change for your local system
+var portName = "/dev/tty.usbmodem1421"; //TODO: change for your local system
 var serialport = require("serialport");
 var SerialPort = serialport.SerialPort; // localize object constructor
 var sp = new SerialPort(portName, {
