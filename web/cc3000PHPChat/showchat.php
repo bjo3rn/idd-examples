@@ -7,7 +7,7 @@
 <pre>
 <?php
  $chat = file_get_contents('./chat.txt');
- echo $chat;
+ echo htmlspecialchars($chat);
 ?>	
 </pre>
 </body>
