@@ -7,17 +7,17 @@
     <script type='text/javascript'>
       // connect socket.io to server
       $(function() {
-        var socket = io.connect('http://localhost:80');
+        var socket = io.connect('http://universe.eecs.berkeley.edu:8080');
         // when a "sensorReading" message comes through, show its value by
         // writing the text of the div with id=container
           socket.on('sensorReading', function (data) {
         $("#container").text(data);
         });
       });
-      
+
     </script>
   </head>
-      
+
   <body>
     <h1>Node Server Demo with Socket.IO</h1>
     <p>Latest received value is: <div id="container">not yet available</div></p>
