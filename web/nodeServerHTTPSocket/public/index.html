@@ -4,22 +4,31 @@
     <title>Node Server with Socket.IO</title>
     <script src='/socket.io/socket.io.js'/></script>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <script type='text/javascript'>
-      // connect socket.io to server
-      $(function() {
-        var socket = io.connect('http://127.0.0.1:8080');
-        // when a "sensorReading" message comes through, show its value by
-        // writing the text of the div with id=container
-          socket.on('sensorReading', function (data) {
-        $("#container").text(data);
-        });
-      });
-
-    </script>
   </head>
 
   <body>
     <h1>Node Server Demo with Socket.IO</h1>
     <p>Latest received value is: <div id="container">not yet available</div></p>
+
+    <input type="text" size="10" id="value" name="value">
+    <input type="button" value="Update" name="updateBtn" id="updateBtn">
   </body>
+  <script type='text/javascript'>
+    // connect socket.io to server
+    var server_addr = "127.0.0.1";
+
+    $(function() {
+      var socket = io.connect('http://' + server_addr + ':8080');
+      // when a "sensorReading" message comes through, show its value by
+      // writing the text of the div with id=container
+      socket.on('sensorReading', function (data) {
+        $("#container").text(data);
+      });
+    });
+
+    $('#updateBtn').click(function(){
+      $.get('http://' + server_addr + ':8080/update?value=' + $( "#value" ).val());
+    });
+  </script>
+
 </html>
