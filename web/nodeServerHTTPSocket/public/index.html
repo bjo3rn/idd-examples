@@ -7,7 +7,7 @@
     <script type='text/javascript'>
       // connect socket.io to server
       $(function() {
-        var socket = io.connect('http://universe.eecs.berkeley.edu:8080');
+        var socket = io.connect('http://localhost:8080');
         // when a "sensorReading" message comes through, show its value by
         // writing the text of the div with id=container
           socket.on('sensorReading', function (data) {
