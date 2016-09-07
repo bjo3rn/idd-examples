@@ -14,7 +14,7 @@ void loop()
 {
     // read analog value and convert units to Volts
     // note: floating point on a microcontroller is inefficient!
-    val = (analogRead(analogPin)/4096.0)*3.3;
+    val = (analogRead(analogPin)/4096.0)*1.0; //use 3.3 to report in Volts
     Serial.printf("%1.2f\n", val); //print ascii-encoded float to serial port
     delay(50); // wait 50ms (20Hz update rate)
 }
