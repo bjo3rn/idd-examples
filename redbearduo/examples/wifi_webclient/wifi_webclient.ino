@@ -1,5 +1,5 @@
 /*
- IDD - RedBear Duo Ping Example
+ IDD - RedBear Duo Web Client Example
  
  This example connects to a WPA2-encrypted Wifi network.
  Then it prints the MAC address of the Duo Board
@@ -42,13 +42,15 @@ STARTUP(WiFi.selectAntenna(ANT_INTERNAL));
 char ssid[] = "idd";
 // your network password (key)
 char password[] = "";
-IPAddress pingAddress(10,149,225,155);
+char server[] = "10.149.225.155"; 
+char path[] = "/idd-examples/hello.txt";
 ///////////////////////////////////////////
 
+TCPClient client;
 
 void printWifiData();
 void printCurrentNet();
-void printPing();
+
 
 void setup() {
   //Initialize serial and wait for port to open:
@@ -86,26 +88,44 @@ void setup() {
   // you're connected now, so print out the status  
   printCurrentNet();
   printWifiData();
+
+    Serial.println("\nStarting connection to server...");
+  // if you get a connection, report back via serial:
+  if (client.connect(server, 80)) {
+    Serial.println("connected to server");
+    // Make a HTTP request:
+    client.print("GET ");
+    client.print(path);
+    client.println(" HTTP/1.1");
+    client.print("Host: ");
+    client.println(server);
+    client.println("Connection: close");
+    client.println();
+  }
+  Serial.println("Ready to read data...");
 }
 
 void loop() {
-  // check the network connection once every 10 seconds:
-  delay(10000);
-  printCurrentNet();
-  printPing(); 
+  // if there are incoming bytes available
+  // from the server, read them and print them:
   
+  while (client.available()) {
+    char c = client.read();
+    Serial.write(c);
+  }
+
+  // if the server's disconnected, stop the client:
+  if (!client.connected()) {
+    Serial.println();
+    Serial.println("disconnecting from server.");
+    client.stop();
+
+    // do nothing forevermore:
+    while (true);
+  }
 }
 
-void printPing() {
-  int tries = 5;
-  int received = WiFi.ping(pingAddress,tries);
-  Serial.print("Pinged: ");
-  Serial.println(pingAddress);
-  Serial.print("Tries: ");
-  Serial.print(tries);
-  Serial.print("; Responses: ");
-  Serial.println(received);
-}
+
 
 void printWifiData() {
   // print your WiFi IP address:
